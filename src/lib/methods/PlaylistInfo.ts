@@ -6,10 +6,7 @@ export default class PlaylistInfo {
         const json = JSON.parse(`{${body.split("{\"hydratable\":\"playlist\",")[1].split("];</script>")[0]}`);
         const meta = json.data;
         const tracksArr = [] as any[];
-        // eslint-disable-next-line array-callback-return
-        meta.tracks.map((x) => {
-            tracksArr.push(x);
-        });
+        meta.tracks.map((x) => tracksArr.push(x));
         return {
             id: meta.id,
             title: meta.title,
