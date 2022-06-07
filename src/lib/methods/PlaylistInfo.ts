@@ -1,13 +1,23 @@
+import Track from "../TrackStruct";
 import { fetchText } from "../Util";
+import type { RawTrack } from "../types/rawtrack";
+import type { Playlist } from "../types/playlist";
+import type { TrackData } from "../types/trackdata";
 
 export default class PlaylistInfo {
-    public async get(url: string) {
+    public async get(url: string): Promise<Playlist> {
         const body = await fetchText(url);
         const json = JSON.parse(`{${body.split("{\"hydratable\":\"playlist\",")[1].split("];</script>")[0]}`);
         const meta = json.data;
-        const tracksArr = [] as any[];
-        meta.tracks.map((x) => tracksArr.push(x));
-        return {
+        const arrData: RawTrack[] = [];
+        // eslint-disable-next-line array-callback-return
+        meta.tracks.filter((x: RawTrack) => {
+            if (!x.artwork_url) {
+                return;
+            }
+            arrData.push(x);
+        });
+       return {
             id: meta.id,
             title: meta.title,
             description: meta.description,
@@ -30,11 +40,11 @@ export default class PlaylistInfo {
                 fullName: meta.user.full_name || null,
                 lastModified: meta.user.last_modified,
                 lastModifiedF: new Date(meta.user.last_modified).toUTCString(),
-                likesCount: meta.user.like_count,
+                likesCount: meta.user.likes_count,
                 urn: meta.user.urn,
                 verified: meta.user.badges.verified,
             },
-            tracks: tracksArr,
+            tracks: arrData.map((x) => new Track(x as unknown as TrackData)).filter((e) => typeof e !== "undefined"),
         };
     }
 }
