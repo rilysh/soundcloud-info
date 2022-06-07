@@ -1,4 +1,4 @@
-import Track from "../TrackStruct";
+import type Track from "../struct/TrackStruct";
 
 export interface Playlist {
     id: number,

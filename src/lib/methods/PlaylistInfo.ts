@@ -1,5 +1,5 @@
-import Track from "../TrackStruct";
-import { fetchText } from "../Util";
+import Track from "../struct/TrackStruct";
+import { fetchText } from "../gate/Util";
 import type { RawTrack } from "../types/rawtrack";
 import type { Playlist } from "../types/playlist";
 import type { TrackData } from "../types/trackdata";

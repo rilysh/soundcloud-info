@@ -1,4 +1,4 @@
-import { fetchText, parseComments, utcDate } from "../Util";
+import { fetchText, parseComments, utcDate } from "../gate/Util";
 import type { Track } from "../types/track";
 
 export default class TrackInfo {
