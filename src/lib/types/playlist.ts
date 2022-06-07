@@ -1,0 +1,31 @@
+import Track from "../TrackStruct";
+
+export interface Playlist {
+    id: number,
+    title: string | null,
+    description: string | null,
+    image: string | null,
+    likesCount: number | null,
+    genre: string | null,
+    displayDate: string,
+    displayDateF: string | null,
+    author: {
+        name: string | null,
+        username: string | null,
+        avatarURL: string | null,
+        createdAt: string,
+        createdAtF: string | null,
+        followersCount: number,
+        followingsCount: number,
+        groupsCount: number,
+        firstName: string | null,
+        lastName: string | null,
+        fullName: string | null,
+        lastModified: string,
+        lastModifiedF: string | null,
+        likesCount: number,
+        urn: string,
+        verified: boolean,
+    },
+    tracks: Track[],
+}
