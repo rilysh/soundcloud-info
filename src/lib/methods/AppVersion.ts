@@ -9,7 +9,3 @@ export default async function SCAppVersion() {
     }
     return "NOT_FOUND";
 }
-
-(async () => {
-    console.log(await SCAppVersion());
-})();

@@ -51,3 +51,13 @@ export async function fetchText(url: string): Promise<any> {
 export function utcDate(date: string): string {
     return new Date(date).toUTCString();
 }
+
+export function parseDuration(duration: string): number {
+    if (!duration.startsWith("PT")) {
+        throw new TypeError("Invalid duration");
+    }
+    const hours = Number(duration.substring(2, 4));
+    const minutes = Number(duration.substring(5, 7));
+    const seconds = Number(duration.substring(8, 10));
+    return (hours * 60 * 60 * 1000) + (minutes * 60 * 1000) + (seconds * 1000);
+}
