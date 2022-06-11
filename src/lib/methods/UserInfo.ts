@@ -2,9 +2,10 @@ import { load } from "cheerio";
 import { SOUNDCLOUD_URL } from "../gate/Constants";
 import { fetchText, parseDuration, utcDate } from "../gate/Util";
 import type { UserData } from "../types/userdata";
+import type { UserTypes } from "../types/usertypes";
 
 export default class UserInfo {
-    public async get(username: string) {
+    public async get(username: string): Promise<UserTypes> {
         const body = await fetchText(`${SOUNDCLOUD_URL}/${username}`);
         const json = JSON.parse(`[{${body.split("{\"hydratable\":\"user\",")[1].split(";</script>")[0]}`);
         const meta = json[0].data;
