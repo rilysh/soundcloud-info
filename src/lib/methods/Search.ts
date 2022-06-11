@@ -4,7 +4,7 @@ import { SOUNDCLOUD_URL } from "../gate/Constants";
 import type { SearchData } from "../types/searchdata";
 
 export default class SCSearch {
-    public async get(query: string, endpoint: string = "all") {
+    public async get(query: string, endpoint: string = "all"): Promise<SearchData[]> {
         if (!query) {
             throw new RangeError("You need to provide a query to search.");
         }
